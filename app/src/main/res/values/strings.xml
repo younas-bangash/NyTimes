@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">NyTimesJava</string>
+    <!-- Network Errors-->
+    <string name="networkError">Oh! You are not connected to a wifi or cellular data network.
+        Please connect and try again</string>
+    <string name="networkErrorCode">NO_INTERNET_CONNECTION</string>
+    <string name="unknownError">Something went wrong!</string>
+
+    <string name="requestTimeOutError">Oops! We couldn’t capture your request in time.Please try again.</string>
+
+    <string name="errorCodeMalformedJson">MALFORMED_JSON</string>
+    <string name="responseMalformedJson">Oops! We hit an error. Try again later.</string>
+
+    <string name="errorCodeConnectFailed">Connection failed</string>
+    <string name="responseConnectFailed">Oops! Connection timeout.</string>
+    <string name="ok">OK</string>
+    <string name="article_icon">Article Icon</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_search">Search Here...</string>
+    <string name="title_popular_article">Popular Articles</string>
+    <string name="article_detils">Article Details</string>
+</resources>

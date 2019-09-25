@@ -1,0 +1,139 @@
+apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
+apply plugin: "org.sonarqube"
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'])
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.nytimes.populararticles"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+        dataBinding.enabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            testCoverageEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+    }
+
+    sonarqube {
+        properties {
+            def appProject = project(':app')
+            property "sonar.sources", "src/main"
+            property "sonar.projectName", "NyPopularArticleApp" // Name of your project
+            property "sonar.projectVersion", "1.0.0" // Version of your project
+            property "sonar.projectDescription", "Application to search popular articles"
+            property "sonar.projectKey", "AndroidCA"
+            property "sonar.host.url", "http://localhost:9005"
+            property "sonar.language", "java"
+            property "sonar.sources", "src/main/java"
+            property "sonar.projectVersion", appProject.android.defaultConfig.versionName + appProject.android.defaultConfig.versionCode
+
+            // Version of your project
+            property "sonar.tests", "src/test/java"
+
+            property "sonar.exclusions", "**/di/**"
+
+            property "sonar.coverage.exclusions", "**/di/**, **/view/**, **/*Fragment.java , " +
+                    "**/ApiService.java, **/*NyTimeApp.java, **/*Activity.java, **/*Adapter.java"
+
+            property "sonar.java.coveragePlugin", "jacoco"
+            property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
+            property "sonar.android.lint.report", "build/outputs/lint-results-debug.xml"
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    debugImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation "android.arch.core:core-testing:$ARCHITECTURE_COMPONENT_VERSION"
+    testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+    testImplementation "org.powermock:powermock-core:$powerMockVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
+    testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
+
+    // androidx Component
+    implementation "androidx.navigation:navigation-fragment:$ANDROIDX_VERSION"
+    implementation "androidx.navigation:navigation-ui:$ANDROIDX_VERSION"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    // Android Architecture Components
+    implementation "android.arch.lifecycle:extensions:$ARCHITECTURE_COMPONENT_VERSION"
+    implementation "android.arch.lifecycle:common-java8:$ARCHITECTURE_COMPONENT_VERSION"
+    implementation "android.arch.lifecycle:reactivestreams:$ARCHITECTURE_COMPONENT_VERSION"
+
+    // okhttp version
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP3_VERSION"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$OKHTTP3_VERSION"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP3_VERSION"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Room SQLite for data persistence
+    implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
+    annotationProcessor "android.arch.persistence.room:compiler:$ROOM_VERSION"
+
+    implementation 'org.jsoup:jsoup:1.10.2'
+}

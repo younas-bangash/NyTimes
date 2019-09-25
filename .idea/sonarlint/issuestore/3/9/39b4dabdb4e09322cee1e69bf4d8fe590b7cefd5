@@ -1,0 +1,23 @@
+
+asquid:S2583‚"DChange this condition so that it does not always evaluate to "false"(ÕÎü³ûÿÿÿÿ
+asquid:S2583™"DChange this condition so that it does not always evaluate to "false"(ÕÎü³ûÿÿÿÿ
+[squid:S2583~"DChange this condition so that it does not always evaluate to "false"(èšÒ¢
+{squid:S1488Š"^Immediately return this expression instead of assigning it to the temporary variable "result".(Õ¨Ó«ıÿÿÿÿ
+_squid:S2583Z"CChange this condition so that it does not always evaluate to "true"(¹Öıæüÿÿÿÿ
+psquid:S1192&"TDefine a constant instead of duplicating this literal "articlePublishDate" 12 times.(óˆÄĞıÿÿÿÿ
+isquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êÓüÃ
+hsquid:S1192"LDefine a constant instead of duplicating this literal "articleUrl" 12 times.(êÖĞıÿÿÿÿ
+\squid:S2583"DChange this condition so that it does not always evaluate to "false"(èšÒ¢
+°squid:S1192*"“Define a constant instead of duplicating this literal "Argument \"articlePublishDate\" is marked as non-null but was passed a null value." 3 times.(ÿî­½ıÿÿÿÿ
+Xsquid:S1126`"AReplace this if-then-else statement by a single return statement.(ïå»
+£squid:S1192 "‹Define a constant instead of duplicating this literal "Argument \"articleUrl\" is marked as non-null but was passed a null value." 3 times.(ú¤éÀ
+Zsquid:S2583`"CChange this condition so that it does not always evaluate to "true"(ïå»
+_squid:S2583i"CChange this condition so that it does not always evaluate to "true"(ÒÜÖÇşÿÿÿÿ
+_squid:S2583j"CChange this condition so that it does not always evaluate to "true"(ºğàÊúÿÿÿÿ
+zsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(”ñ¯íùÿÿÿÿ
+zsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(Ãş”«ıÿÿÿÿ
+usquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±
+zsquid:UselessImportCheck
+"QRemove this unnecessary import: java.lang classes are always implicitly imported.(¤î˜Óüÿÿÿÿ
+isquid:S00117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÍæ®
+zsquid:UselessImportCheck	"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ôİÕıÿÿÿÿ
